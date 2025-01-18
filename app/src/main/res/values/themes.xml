@@ -2,4 +2,7 @@
 <resources>
 
     <style name="Theme.UnjumbleIt" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
 </resources>
