@@ -4,29 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.first.unjumbleit.R
+import com.first.unjumbleit.MenuActivity
 
 class StartPageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_start_page) // Ensure this layout exists
+        setContentView(R.layout.activity_start_page) // Ensure the layout matches your updated XML
 
-        val level1Button = findViewById<Button>(R.id.level1Button)
-        val level2Button = findViewById<Button>(R.id.level2Button)
+        // Find the Start button
+        val startButton = findViewById<Button>(R.id.startButton)
 
-        level1Button.setOnClickListener {
-            startGame(1)  // Start level 1
+        // Set a click listener for the Start button
+        startButton.setOnClickListener {
+            // Navigate to the MenuActivity
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
         }
-
-        level2Button.setOnClickListener {
-            startGame(2)  // Start level 2
-        }
-    }
-
-    private fun startGame(level: Int) {
-        val intent = Intent(this, GameActivity::class.java)
-        intent.putExtra("LEVEL", level)  // Pass the selected level
-        startActivity(intent)
     }
 }
