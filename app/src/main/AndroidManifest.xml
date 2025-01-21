@@ -15,8 +15,10 @@
         tools:targetApi="31">
 
         <!-- Splash Screen Activity: MAIN and LAUNCHER -->
-        <activity android:name=".SplashScreenActivity"
+        <activity
+            android:name=".SplashScreenActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,14 +26,27 @@
             </intent-filter>
         </activity>
 
-        <!-- Start Page Activity (no MAIN or LAUNCHER) -->
-        <activity android:name=".StartPageActivity"
+        <!-- Start Page Activity -->
+        <activity
+            android:name=".StartPageActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"
             android:exported="true" />
 
-        <!-- Add other activities as necessary (e.g., GameActivity) -->
-        <activity android:name=".GameActivity"
+        <!-- Menu Activity -->
+        <activity
+            android:name=".MenuActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"
             android:exported="true" />
+
+        <!-- Game Activity -->
+        <activity
+            android:name=".GameActivity"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+
+        <!-- Add other activities as necessary -->
     </application>
 
 </manifest>
