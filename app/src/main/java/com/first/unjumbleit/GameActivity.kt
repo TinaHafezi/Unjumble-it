@@ -1,7 +1,6 @@
 package com.first.unjumbleit
 
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase // Add this import
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -12,12 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 
 class GameActivity : AppCompatActivity() {
 
-    private lateinit var dbHelper: DatabaseHelper
-    private var db: SQLiteDatabase? = null
-    private var cursor: Cursor? = null
-    private var currentLevel: Int = 0
+    private var currentLevelId: Long = -1
     private var currentWord: String = ""
     private var currentHint: String = ""
+    private var currentPlanetName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,13 +22,14 @@ class GameActivity : AppCompatActivity() {
 
         Log.d("GameActivity", "onCreate: Activity created")
 
-        // Get the level ID from the intent
-        currentLevel = intent.getIntExtra("LEVEL_ID", 1) // Default to level 1 if not provided
-        Log.d("GameActivity", "Level ID received: $currentLevel")
+        // Get the word, hint, level ID, and planet name from the intent
+        currentWord = intent.getStringExtra("WORD") ?: ""
+        currentHint = intent.getStringExtra("HINT") ?: ""
+        currentLevelId = intent.getLongExtra("LEVEL_ID", -1)
+        currentPlanetName = intent.getStringExtra("PLANET_NAME") ?: ""
 
-        // Initialize DatabaseHelper and get a readable database
-        dbHelper = DatabaseHelper(this)
-        db = dbHelper.readableDatabase
+        Log.d("GameActivity", "Level ID = $currentLevelId, Planet = $currentPlanetName")
+        Log.d("GameActivity", "Word: $currentWord, Hint: $currentHint")
 
         // Initialize UI elements
         val levelTextView = findViewById<TextView>(R.id.levelText)
@@ -39,11 +37,8 @@ class GameActivity : AppCompatActivity() {
         val guessInput = findViewById<EditText>(R.id.guess)
         val submitButton = findViewById<Button>(R.id.submitButton)
 
-        // Load the level data from the database
-        loadLevel(currentLevel)
-
         // Display the level and hint
-        levelTextView.text = "Level $currentLevel"
+        levelTextView.text = "Level $currentLevelId - $currentPlanetName"
         hintTextView.text = "Hint: $currentHint"
 
         // Handle the submit button logic
@@ -58,50 +53,47 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadLevel(level: Int) {
-        Log.d("GameActivity", "loadLevel: Loading level $level")
+    private fun loadNextLevel() {
+        // Increment the level ID and check if it's within the valid range
+        val nextLevelId = currentLevelId + 1
 
-        // Query the levels table for the specific level
-        cursor = db?.query(
+        // Query the database to check if the next level exists
+        val dbHelper = DatabaseHelper(this)
+        val db = dbHelper.readableDatabase
+        val cursor: Cursor? = db.query(
             DatabaseHelper.TABLE_LEVELS,
-            null,  // All columns
-            "${DatabaseHelper.COLUMN_LEVEL} = ?",
-            arrayOf(level.toString()),
+            arrayOf(DatabaseHelper.COLUMN_WORD, DatabaseHelper.COLUMN_HINT),
+            "${DatabaseHelper.COLUMN_ID} = ? AND ${DatabaseHelper.COLUMN_PLANET} = ?",
+            arrayOf(nextLevelId.toString(), currentPlanetName),
             null,
             null,
             null
         )
 
         if (cursor?.moveToFirst() == true) {
-            // Retrieve word and hint from the cursor
-            currentWord = cursor?.getString(cursor?.getColumnIndexOrThrow(DatabaseHelper.COLUMN_WORD) ?: -1) ?: ""
-            currentHint = cursor?.getString(cursor?.getColumnIndexOrThrow(DatabaseHelper.COLUMN_HINT) ?: -1) ?: ""
+            // Load the next level
+            currentLevelId = nextLevelId
+            currentWord = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_WORD))
+            currentHint = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_HINT))
 
-            Log.d("GameActivity", "Level $level loaded: Word = $currentWord, Hint = $currentHint")
+            Log.d("GameActivity", "Next level loaded: Level ID = $currentLevelId, Word = $currentWord, Hint = $currentHint")
+
+            // Update the UI
+            val levelTextView = findViewById<TextView>(R.id.levelText)
+            val hintTextView = findViewById<TextView>(R.id.hintText)
+            levelTextView.text = "Level $currentLevelId - $currentPlanetName"
+            hintTextView.text = "Hint: $currentHint"
+
+            // Clear the guess input
+            val guessInput = findViewById<EditText>(R.id.guess)
+            guessInput.text.clear()
         } else {
-            Log.e("GameActivity", "Level data not found for level $level")
-            Toast.makeText(this, "Level data not found!", Toast.LENGTH_SHORT).show()
+            // No more levels, show completion message
+            Toast.makeText(this, "Congratulations! You've completed all levels!", Toast.LENGTH_LONG).show()
             finish()
         }
-    }
 
-    private fun loadNextLevel() {
-        // Move to the next level, update the currentLevel, and load the data for the next level
-        currentLevel++
-        if (currentLevel > 3) { // Adjust this condition based on your total number of levels
-            // Handle the end of the game, e.g., show a "game completed" message
-            Toast.makeText(this, "Congratulations! You've completed all levels!", Toast.LENGTH_LONG).show()
-            finish()  // Or restart the game
-        } else {
-            loadLevel(currentLevel)
-            val hintTextView = findViewById<TextView>(R.id.hintText)
-            hintTextView.text = "Hint: $currentHint"
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
         cursor?.close()
-        db?.close()
+        db.close()
     }
 }

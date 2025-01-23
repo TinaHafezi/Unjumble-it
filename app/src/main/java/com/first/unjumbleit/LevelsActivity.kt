@@ -50,7 +50,9 @@ class LevelsActivity : AppCompatActivity() {
             arrayOf(
                 "${DatabaseHelper.COLUMN_ID} AS _id", // Alias 'id' as '_id'
                 DatabaseHelper.COLUMN_LEVEL,
-                DatabaseHelper.COLUMN_PLANET
+                DatabaseHelper.COLUMN_PLANET,
+                DatabaseHelper.COLUMN_WORD, // Include word column
+                DatabaseHelper.COLUMN_HINT  // Include hint column
             ),
             "${DatabaseHelper.COLUMN_PLANET} = ?",
             arrayOf(planetName), // Filter by planet name
@@ -85,12 +87,37 @@ class LevelsActivity : AppCompatActivity() {
     private fun onLevelClicked(levelId: Long, planetName: String) {
         Log.d("LevelsActivity", "onLevelClicked: Level ID = $levelId, Planet = $planetName")
 
-        // Start the GameActivity (or any other activity) and pass the level ID and planet name
-        val intent = Intent(this, GameActivity::class.java).apply {
-            putExtra("LEVEL_ID", levelId)
-            putExtra("PLANET_NAME", planetName)
+        // Get the word and hint for the selected level
+        val db = dbHelper.readableDatabase
+        val cursor: Cursor = db.query(
+            DatabaseHelper.TABLE_LEVELS,
+            arrayOf(DatabaseHelper.COLUMN_WORD, DatabaseHelper.COLUMN_HINT),
+            "${DatabaseHelper.COLUMN_ID} = ?",
+            arrayOf(levelId.toString()),
+            null,
+            null,
+            null
+        )
+
+        if (cursor.moveToFirst()) {
+            val word = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_WORD))
+            val hint = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_HINT))
+
+            Log.d("LevelsActivity", "Word: $word, Hint: $hint")
+
+            // Start the GameActivity and pass the level data
+            val intent = Intent(this, GameActivity::class.java).apply {
+                putExtra("WORD", word)
+                putExtra("HINT", hint)
+                putExtra("LEVEL_ID", levelId)
+                putExtra("PLANET_NAME", planetName)
+            }
+            startActivity(intent)
+        } else {
+            Log.e("LevelsActivity", "No data found for level ID: $levelId")
         }
-        startActivity(intent)
+
+        cursor.close()
     }
 
     override fun onDestroy() {
