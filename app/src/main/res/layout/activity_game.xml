@@ -4,52 +4,31 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/white">
+    android:padding="16dp">
 
-    <!-- Level Text -->
     <TextView
         android:id="@+id/levelText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Level"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginBottom="24dp" />
+        android:textSize="24sp" />
 
-    <!-- Hint Text -->
     <TextView
         android:id="@+id/hintText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hint"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="32dp" />
+        android:textSize="18sp" />
 
-    <!-- Guess Input Field -->
     <EditText
         android:id="@+id/guess"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter your guess"
-        android:inputType="text"
-        android:textSize="18sp"
-        android:padding="12dp"
-        android:background="@drawable/starry_background"
-    android:layout_marginBottom="24dp" />
+        android:hint="Your guess" />
 
-    <!-- Submit Button -->
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:textSize="18sp"
-        android:paddingHorizontal="32dp"
-        android:paddingVertical="12dp"
-        android:background="@drawable/starry_background"
-    android:textColor="@color/white" />
-
+        android:text="Submit" />
 </LinearLayout>

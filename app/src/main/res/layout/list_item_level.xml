@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <!-- Level Number -->
     <TextView
         android:id="@+id/levelNumber"
         android:layout_width="wrap_content"
@@ -14,12 +13,10 @@
         android:textStyle="bold"
         android:text="Level 1" />
 
-    <!-- Planet Name -->
     <TextView
         android:id="@+id/planetName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:text="Planet: Earth" />
-
+        android:text="Planet: Multiverse" />
 </LinearLayout>
