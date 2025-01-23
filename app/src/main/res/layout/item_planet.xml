@@ -19,5 +19,6 @@
         android:text="Planet Name"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:paddingTop="8dp" />
 </LinearLayout>
