@@ -19,7 +19,8 @@
             android:name=".SplashScreenActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme"> <!-- Explicitly set the theme -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
