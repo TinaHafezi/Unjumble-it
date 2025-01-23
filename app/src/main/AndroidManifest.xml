@@ -43,10 +43,15 @@
         <!-- Game Activity -->
         <activity
             android:name=".GameActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"
             android:exported="true" />
 
-        <!-- Add other activities as necessary -->
-    </application>
+        <activity android:name=".LevelsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+
+         </application>
 
 </manifest>
