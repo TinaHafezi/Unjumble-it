@@ -124,4 +124,13 @@ class LevelsActivity : AppCompatActivity() {
         super.onDestroy()
         dbHelper.close() // Close the database helper to avoid memory leaks
     }
+    override fun onResume() {
+        super.onResume()
+        MusicManager.playMusic(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MusicManager.pauseMusic()
+    }
 }
