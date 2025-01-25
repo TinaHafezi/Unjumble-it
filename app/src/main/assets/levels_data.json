@@ -1,180 +1,214 @@
 {
-    "levels": [
-      {
-        "word": "Event",
-        "hint": "Something that happens",
-        "planet": "Multiverse",
-        "state": 1,
-        "level": 1
-      },
-      {
-        "word": "Dimension",
-        "hint": "Different space-time continuum",
-        "planet": "Multiverse",
-        "state": 1,
-        "level": 2
-      },
-      {
-        "word": "Sequence",
-        "hint": "Order of events",
-        "planet": "Multiverse",
-        "state": 1,
-        "level": 3
-      },
-      {
-        "word": "Universe",
-        "hint": "All that exists",
-        "planet": "Multiverse",
-        "state": 1,
-        "level": 4
-      },
-      {
-        "word": "Portal",
-        "hint": "Gateway between worlds",
-        "planet": "Multiverse",
-        "state": 1,
-        "level": 5
-      },
-
-      {
-        "word": "Worm",
-        "hint": "Small, wriggling creature",
-        "planet": "Parasites",
-        "state": 2,
-        "level": 1
-      },
-      {
-        "word": "Contamination",
-        "hint": "Pollution, spreading infection",
-        "planet": "Parasites",
-        "state": 2,
-        "level": 2
-      },
-      {
-        "word": "Captivity",
-        "hint": "Held against your will",
-        "planet": "Parasites",
-        "state": 2,
-        "level": 3
-      },
-      {
-        "word": "Parasite",
-        "hint": "Lives off host organism",
-        "planet": "Parasites",
-        "state": 2,
-        "level": 4
-      },
-      {
-        "word": "Mutation",
-        "hint": "Change in genetic structure",
-        "planet": "Parasites",
-        "state": 2,
-        "level": 5
-      },
-      {
-        "word": "Monster",
-        "hint": "Large, frightening creature",
-        "planet": "Monsters",
-        "state": 3,
-        "level": 1
-      },
-      {
-        "word": "Shapeshift",
-        "hint": "Change physical appearance",
-        "planet": "Monsters",
-        "state": 3,
-        "level": 2
-      },
-      {
-        "word": "Enemy",
-        "hint": "Opponent, foe, rival",
-        "planet": "Monsters",
-        "state": 3,
-        "level": 3
-      },
-      {
-        "word": "Hunt",
-        "hint": "Track and capture prey",
-        "planet": "Monsters",
-        "state": 3,
-        "level": 4
-      },
-      {
-        "word": "Power",
-        "hint": "Strength or energy",
-        "planet": "Monsters",
-        "state": 3,
-        "level": 5
-      },
-      {
-        "word": "Experiment",
-        "hint": "Controlled scientific test",
-        "planet": "Science",
-        "state": 4,
-        "level": 1
-      },
-      {
-        "word": "Analysis",
-        "hint": "Study or examination",
-        "planet": "Science",
-        "state": 4,
-        "level": 2
-      },
-      {
-        "word": "Structure",
-        "hint": "Arrangement of parts",
-        "planet": "Science",
-        "state": 4,
-        "level": 3
-      },
-      {
-        "word": "Intelligence",
-        "hint": "Capacity for reasoning",
-        "planet": "Science",
-        "state": 4,
-        "level": 4
-      },
-      {
-        "word": "Microscope",
-        "hint": "Tool for viewing small objects",
-        "planet": "Science",
-        "state": 4,
-        "level": 5
-      },
-      {
-        "word": "Magic",
-        "hint": "Power beyond nature",
-        "planet": "Supernatural",
-        "state": 5,
-        "level": 1
-      },
-      {
-        "word": "Supernatural",
-        "hint": "Beyond natural laws",
-        "planet": "Supernatural",
-        "state": 5,
-        "level": 2
-      },
-      {
-        "word": "Spirit",
-        "hint": "Non-physical being or presence",
-        "planet": "Supernatural",
-        "state": 5,
-        "level": 3
-      },
-      {
-        "word": "Fairy",
-        "hint": "Magical tiny creature",
-        "planet": "Supernatural",
-        "state": 5,
-        "level": 4
-      },
-      {
-        "word": "Mystery",
-        "hint": "Something unknown, puzzling",
-        "planet": "Supernatural",
-        "state": 5,
-        "level": 5
-      }
-    ]
-  }
+  "levels": [
+    {
+      "word": "Monster",
+      "hint": "Large, frightening creature",
+      "planet": "Monsters",
+      "state": 1,
+      "level": 1
+    },
+    {
+      "word": "Shapeshift",
+      "hint": "Change physical appearance",
+      "planet": "Monsters",
+      "state": 1,
+      "level": 2
+    },
+    {
+      "word": "Enemy",
+      "hint": "Opponent, foe, rival",
+      "planet": "Monsters",
+      "state": 1,
+      "level": 3
+    },
+    {
+      "word": "Hunt",
+      "hint": "Track and capture prey",
+      "planet": "Monsters",
+      "state": 1,
+      "level": 4
+    },
+    {
+      "word": "Power",
+      "hint": "Strength or energy",
+      "planet": "Monsters",
+      "state": 1,
+      "level": 5
+    },
+    {
+      "word": "Experiment",
+      "hint": "Controlled scientific test",
+      "planet": "Science",
+      "state": 2,
+      "level": 1
+    },
+    {
+      "word": "Analysis",
+      "hint": "Study or examination",
+      "planet": "Science",
+      "state": 2,
+      "level": 2
+    },
+    {
+      "word": "Structure",
+      "hint": "Arrangement of parts",
+      "planet": "Science",
+      "state": 2,
+      "level": 3
+    },
+    {
+      "word": "Intelligence",
+      "hint": "Capacity for reasoning",
+      "planet": "Science",
+      "state": 2,
+      "level": 4
+    },
+    {
+      "word": "Microscope",
+      "hint": "Tool for viewing small objects",
+      "planet": "Science",
+      "state": 2,
+      "level": 5
+    },
+    {
+      "word": "Magic",
+      "hint": "Power beyond nature",
+      "planet": "Supernatural",
+      "state": 3,
+      "level": 1
+    },
+    {
+      "word": "Supernatural",
+      "hint": "Beyond natural laws",
+      "planet": "Supernatural",
+      "state": 3,
+      "level": 2
+    },
+    {
+      "word": "Spirit",
+      "hint": "Non-physical being or presence",
+      "planet": "Supernatural",
+      "state": 3,
+      "level": 3
+    },
+    {
+      "word": "Fairy",
+      "hint": "Magical tiny creature",
+      "planet": "Supernatural",
+      "state": 3,
+      "level": 4
+    },
+    {
+      "word": "Mystery",
+      "hint": "Something unknown, puzzling",
+      "planet": "Supernatural",
+      "state": 3,
+      "level": 5
+    },
+    {
+      "word": "Worm",
+      "hint": "Small, wriggling creature",
+      "planet": "Parasites",
+      "state": 4,
+      "level": 1
+    },
+    {
+      "word": "Contamination",
+      "hint": "Pollution, spreading infection",
+      "planet": "Parasites",
+      "state": 4,
+      "level": 2
+    },
+    {
+      "word": "Captivity",
+      "hint": "Held against your will",
+      "planet": "Parasites",
+      "state": 4,
+      "level": 3
+    },
+    {
+      "word": "Parasite",
+      "hint": "Lives off host organism",
+      "planet": "Parasites",
+      "state": 4,
+      "level": 4
+    },
+    {
+      "word": "Mutation",
+      "hint": "Change in genetic structure",
+      "planet": "Parasites",
+      "state": 4,
+      "level": 5
+    },
+    {
+      "word": "Event",
+      "hint": "Something that happens",
+      "planet": "Multiverse",
+      "state": 5,
+      "level": 1
+    },
+    {
+      "word": "Dimension",
+      "hint": "Different space-time continuum",
+      "planet": "Multiverse",
+      "state": 5,
+      "level": 2
+    },
+    {
+      "word": "Sequence",
+      "hint": "Order of events",
+      "planet": "Multiverse",
+      "state": 5,
+      "level": 3
+    },
+    {
+      "word": "Universe",
+      "hint": "All that exists",
+      "planet": "Multiverse",
+      "state": 5,
+      "level": 4
+    },
+    {
+      "word": "Portal",
+      "hint": "Gateway between worlds",
+      "planet": "Multiverse",
+      "state": 5,
+      "level": 5
+    },
+    {
+      "word": "Clouds",
+      "hint": "Venus thick cover",
+      "planet": "Venus",
+      "state": 6,
+      "level": 1
+    },
+    {
+      "word": "Bright",
+      "hint": "Venus shines in the sky",
+      "planet": "Venus",
+      "state": 6,
+      "level": 2
+    },
+    {
+      "word": "Atmosphere",
+      "hint": "Thick layer of gases surrounding Venus",
+      "planet": "Venus",
+      "state": 6,
+      "level": 3
+    },
+    {
+      "word": "Volcano",
+      "hint": "Common feature on Venus",
+      "planet": "Venus",
+      "state": 6,
+      "level": 4
+    },
+    {
+      "word": "Pressure",
+      "hint": "Extremely high on Venuss surface",
+      "planet": "Venus",
+      "state": 6,
+      "level": 5
+    }
+  ]
+}
