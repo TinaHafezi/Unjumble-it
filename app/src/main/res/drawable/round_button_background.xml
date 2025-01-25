@@ -1,0 +1,5 @@
+<!-- res/drawable/round_button_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/holo_green_light" /> <!-- Background color -->
+    <corners android:radius="28dp" /> <!-- Half of the button size for a perfect circle -->
+</shape>
