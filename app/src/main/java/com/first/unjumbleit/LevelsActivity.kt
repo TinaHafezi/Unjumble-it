@@ -15,6 +15,9 @@ class LevelsActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (MusicManager.isMusicOn()) {
+            MusicManager.startMusic(this)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_levels)
 
@@ -122,15 +125,8 @@ class LevelsActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        MusicManager.stopMusic(this)
         dbHelper.close() // Close the database helper to avoid memory leaks
     }
-    override fun onResume() {
-        super.onResume()
-        MusicManager.playMusic(this)
-    }
 
-    override fun onPause() {
-        super.onPause()
-        MusicManager.pauseMusic()
-    }
 }

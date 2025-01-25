@@ -12,8 +12,9 @@ class StartPageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start_page)
 
         // Start playing background music
-        MusicManager.playMusic(this)
-
+        if (MusicManager.isMusicOn()) {
+            MusicManager.startMusic(this)
+        }
         // Find the Start button
         val startButton = findViewById<Button>(R.id.startButton)
         startButton.setOnClickListener {
@@ -41,18 +42,9 @@ class StartPageActivity : AppCompatActivity() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        MusicManager.pauseMusic()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        MusicManager.playMusic(this)
-    }
 
     override fun onDestroy() {
         super.onDestroy()
-        MusicManager.releaseMusic()
+        MusicManager.stopMusic(this)
     }
 }

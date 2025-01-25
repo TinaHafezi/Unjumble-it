@@ -12,6 +12,9 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var planetsGridView: GridView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (MusicManager.isMusicOn()) {
+            MusicManager.startMusic(this)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
@@ -40,14 +43,5 @@ class MenuActivity : AppCompatActivity() {
             intent.putExtra("PLANET_NAME", selectedPlanet.planetName)
             startActivity(intent)
         }
-    }
-    override fun onResume() {
-        super.onResume()
-        MusicManager.playMusic(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        MusicManager.pauseMusic()
     }
 }

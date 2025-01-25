@@ -31,6 +31,10 @@ class GameActivity : AppCompatActivity() {
     private var stars: Int = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (MusicManager.isMusicOn()) {
+            MusicManager.startMusic(this)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
@@ -246,13 +250,5 @@ class GameActivity : AppCompatActivity() {
         cursor?.close()
         db.close()
     }
-    override fun onResume() {
-        super.onResume()
-        MusicManager.playMusic(this)
-    }
 
-    override fun onPause() {
-        super.onPause()
-        MusicManager.pauseMusic()
-    }
 }

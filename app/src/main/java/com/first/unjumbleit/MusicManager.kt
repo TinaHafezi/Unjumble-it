@@ -1,37 +1,37 @@
 package com.first.unjumbleit
 
 import android.content.Context
-import android.media.MediaPlayer
+import android.content.Intent
 
 object MusicManager {
-    private var mediaPlayer: MediaPlayer? = null
     private var isMusicOn = true // Default to music on
 
-    fun playMusic(context: Context) {
-        if (isMusicOn && mediaPlayer == null) {
-            mediaPlayer = MediaPlayer.create(context, R.raw.background_music)
-            mediaPlayer?.isLooping = true // Loop the music
-            mediaPlayer?.start()
+    fun startMusic(context: Context) {
+        if (isMusicOn) {
+            val intent = Intent(context, MusicService::class.java)
+            context.startService(intent)
         }
     }
 
-    fun pauseMusic() {
-        if (mediaPlayer?.isPlaying == true) {
-            mediaPlayer?.pause()
+    fun pauseMusic(context: Context) {
+        if (isMusicOn) {
+            val intent = Intent(context, MusicService::class.java)
+            intent.action = "PAUSE"
+            context.startService(intent)
         }
     }
 
-    fun releaseMusic() {
-        mediaPlayer?.release()
-        mediaPlayer = null
+    fun stopMusic(context: Context) {
+        val intent = Intent(context, MusicService::class.java)
+        context.stopService(intent)
     }
 
     fun toggleMusic(context: Context) {
         isMusicOn = !isMusicOn
         if (isMusicOn) {
-            playMusic(context)
+            startMusic(context)
         } else {
-            pauseMusic()
+            pauseMusic(context)
         }
     }
 
