@@ -19,29 +19,25 @@ class MenuActivity : AppCompatActivity() {
 
         planetsGridView = findViewById(R.id.planetsGridView)
 
-        // Create a list of planets
         val planets = listOf(
-            Planet("Parasites", R.drawable.planet_parasites, "Parasites"), // Replace with actual image resource
-            Planet("Science", R.drawable.planet_science, "Science"), // Replace with actual image resource
-            Planet("Supernatural", R.drawable.planet_supernatural, "Supernatural"),
             Planet("Monsters", R.drawable.planet_monsters, "Monsters"),
-            Planet("Multiverse", R.drawable.planet_multiverse, "Multiverse") // Replace with actual image resource
-// Replace with actual image resource
+            Planet("Science", R.drawable.planet_science, "Science"),
+            Planet("Supernatural", R.drawable.planet_supernatural, "Supernatural"),
+            Planet("Parasites", R.drawable.planet_parasites, "Parasites"),
+            Planet("Multiverse", R.drawable.planet_multiverse, "Multiverse"),
+            Planet("Venus", R.drawable.planet_venus, "Venus")
         )
 
-        // Set up the adapter
         val adapter = PlanetAdapter(this, planets)
         planetsGridView.adapter = adapter
 
-        // Handle planet clicks
         planetsGridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             val selectedPlanet = planets[position]
             Log.d("MenuActivity", "Planet clicked: ${selectedPlanet.name}")
 
-            // Start LevelsActivity and pass the planet ID
-            // When starting LevelsActivity, pass the planet name instead of ID
+
             val intent = Intent(this, LevelsActivity::class.java)
-            intent.putExtra("PLANET_NAME", selectedPlanet.planetName) // Pass planet name
+            intent.putExtra("PLANET_NAME", selectedPlanet.planetName)
             startActivity(intent)
         }
     }
