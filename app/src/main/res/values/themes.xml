@@ -2,7 +2,12 @@
 <resources>
 
     <style name="Theme.UnjumbleIt" parent="android:Theme.Material.Light.NoActionBar" />
+
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
     </style>
 </resources>
