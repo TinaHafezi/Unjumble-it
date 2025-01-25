@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.database.Cursor
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.GridLayout
@@ -59,7 +61,7 @@ class GameActivity : AppCompatActivity() {
         star3 = findViewById(R.id.star3)
 
         // Display the level and hint
-        levelTextView.text = "Level $currentLevelId - $currentPlanetName"
+        levelTextView.text = "Level $currentLevelId "
         hintTextView.text = "Hint: $currentHint"
 
         // Scramble the letters of the current word
@@ -94,19 +96,33 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun showYouLostDialog() {
-        AlertDialog.Builder(this)
-            .setTitle("You Lost!")
-            .setMessage("You've run out of stars. Would you like to try again or exit?")
-            .setPositiveButton("Try Again") { _, _ ->
-                // Restart the current level
-                restartLevel()
-            }
-            .setNegativeButton("Exit") { _, _ ->
-                // Exit the game
-                finish()
-            }
+        // Inflate the custom layout
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.custom_you_lost_dialog, null)
+
+        // Build the dialog
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView) // Set the custom layout
             .setCancelable(false) // Prevent dismissing the dialog by tapping outside
-            .show()
+            .create()
+
+        // Set up button click listeners
+        dialogView.findViewById<Button>(R.id.btnTryAgain).setOnClickListener {
+            // Restart the current level
+            restartLevel()
+            dialog.dismiss() // Dismiss the dialog
+        }
+
+        dialogView.findViewById<Button>(R.id.btnExit).setOnClickListener {
+            // Exit the game
+            finish()
+            dialog.dismiss() // Dismiss the dialog
+        }
+
+        // Optional: Add animation
+        dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
+
+        // Show the dialog
+        dialog.show()
     }
 
     private fun restartLevel() {
@@ -134,6 +150,7 @@ class GameActivity : AppCompatActivity() {
             "monsters" -> R.drawable.bg_monsters
             "science" -> R.drawable.bg_science
             "supernatural" -> R.drawable.bg_supernatural
+            "venus" -> R.drawable.bg_venus
             else -> R.drawable.starry_background
         }
         rootLayout.setBackgroundResource(backgroundResId)
@@ -145,43 +162,41 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun setupLetterButtons() {
-        // Clear the guess text view and letter buttons container
-        guessTextView.text = ""
         letterButtonsContainer.removeAllViews()
+        letterButtonsContainer.columnCount = 4 // Ensure column count matches your XML
 
-        // Define the number of columns for the grid
-        val columns = 4
-        letterButtonsContainer.columnCount = columns
+        // Define button width/height in dp (adjust as needed)
+        val buttonSize = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            60f,
+            resources.displayMetrics
+        ).toInt()
 
-        // Create a button for each scrambled letter
         for ((index, letter) in scrambledLetters.withIndex()) {
             val button = Button(this).apply {
                 text = letter.toString()
                 layoutParams = GridLayout.LayoutParams().apply {
-                    width = 0
-                    height = GridLayout.LayoutParams.WRAP_CONTENT
-                    columnSpec = GridLayout.spec(index % columns, 1f)
-                    rowSpec = GridLayout.spec(index / columns)
+                    width = buttonSize // Fixed width
+                    height = buttonSize // Fixed height
+
+                    // Calculate row and column positions
+                    val row = index / letterButtonsContainer.columnCount
+                    val col = index % letterButtonsContainer.columnCount
+
+                    // Set column/row specs
+                    columnSpec = GridLayout.spec(col, 1f) // Column index and weight
+                    rowSpec = GridLayout.spec(row, 1f) // Row index and weight
+
                     setMargins(8, 8, 8, 8)
                 }
                 setOnClickListener {
-                    val currentGuess = guessTextView.text.toString()
-                    if (currentGuess.contains(text)) {
-                        // If the letter is already in the guess, remove it
-                        val newGuess = currentGuess.replaceFirst(text.toString(), "")
-                        guessTextView.text = newGuess
-                        isEnabled = true // Re-enable the button
-                    } else {
-                        // If the letter is not in the guess, add it
-                        guessTextView.append(text)
-                        isEnabled = false // Disable the button
-                    }
+                    guessTextView.append(letter.toString())
+                    it.isEnabled = false
                 }
             }
             letterButtonsContainer.addView(button)
         }
     }
-
     private fun clearGuessAndResetButtons() {
         // Clear the guess text view
         guessTextView.text = ""
@@ -230,5 +245,14 @@ class GameActivity : AppCompatActivity() {
 
         cursor?.close()
         db.close()
+    }
+    override fun onResume() {
+        super.onResume()
+        MusicManager.playMusic(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MusicManager.pauseMusic()
     }
 }
